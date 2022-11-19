@@ -2,7 +2,7 @@
 
 ## Table of Contents
 - [Environment Variables](#environment-variables)
-- [REST API Reference](#api-reference)
+- [REST API Reference](#rest-api-reference)
   - [Shared](#shared)
     - [Authentication](#authentication)
   - [Driver](#driver)
@@ -14,6 +14,10 @@
     - [Registering Rider](#registering-rider)
     - [Cancel Rider](#cancel-rider)
     - [Fetching Driver Assignment](#fetching-driver-assignment)
+- [Socket.io API Reference](#socketio-api-reference)
+ - [Shared](#shared-1)
+  - [Authentication](#authentication-1)
+ - [Driver](#driver-1)
 
 ## Environment Variables
 | Key | Usage |
@@ -25,14 +29,14 @@
 ## REST API Reference
 ### Shared
 #### Authentication
-**Endpoint:**
+**Endpoint**
 ``/authenticate`` GET
 
-**Usage:**
+**Usage**
 
 Get an authorization token at the beginning of the session.
 
-**Response:**
+**Response**
 ```json
 {
   "token": "<authorizationToken>"
@@ -41,14 +45,14 @@ Get an authorization token at the beginning of the session.
 
 ### Driver
 #### Registering Driver
-**Endpoint:**
+**Endpoint**
 ``/driver/registerRequest`` POST
 
-**Usage:**
+**Usage**
 
 Register a driver and get route coordinates.
 
-**Payload:**
+**Payload**
 ```json
 {
   "token": "<authorizationToken>",
@@ -63,7 +67,7 @@ Register a driver and get route coordinates.
 }
 ```
 
-**Response:**
+**Response**
 ```json
 {
   "status": "ok",
@@ -72,21 +76,21 @@ Register a driver and get route coordinates.
 ```
 
 #### Fetching Rider Request
-**Endpoint:**
+**Endpoint**
 ``/driver/fetchRider`` POST
 
-**Usage:**
+**Usage**
 
 Check if a rider request is pending.
 
-**Payload:**
+**Payload**
 ```json
 {
   "token": "<authorizationToken>"
 }
 ```
 
-**Response:**
+**Response**
 - If no rider request is pending
 ```json
 {
@@ -105,14 +109,14 @@ Check if a rider request is pending.
 ```
 
 #### Accepting Rider Request
-**Endpoint:**
+**Endpoint**
 ``/driver/acceptRider`` POST
 
-**Usage:**
+**Usage**
 
 Commit to picking up the pending rider.
 
-**Payload:**
+**Payload**
 ```json
 {
   "token": "<authorizationToken>",
@@ -120,7 +124,7 @@ Commit to picking up the pending rider.
 }
 ```
 
-**Response:**
+**Response**
 - If offer still available
 ```json
 {
@@ -135,14 +139,14 @@ Commit to picking up the pending rider.
 ```
 
 #### Declining Rider Request
-**Endpoint:**
+**Endpoint**
 ``/driver/declineRider`` POST
 
-**Usage:**
+**Usage**
 
 Decline picking up the pending rider.
 
-**Payload:**
+**Payload**
 ```json
 {
   "token": "<authorizationToken>",
@@ -150,7 +154,7 @@ Decline picking up the pending rider.
 }
 ```
 
-**Response:**
+**Response**
 ```json
 {
   "status": "ok"
@@ -159,14 +163,14 @@ Decline picking up the pending rider.
 
 ### Rider
 #### Registering Rider
-**Endpoint:**
+**Endpoint**
 ``/rider/registerRequest`` POST
 
-**Usage:**
+**Usage**
 
 Register a rider and begin the search for an available driver.
 
-**Payload:**
+**Payload**
 ```json
 {
   "token": "<authorizationToken>",
@@ -181,7 +185,7 @@ Register a rider and begin the search for an available driver.
 }
 ```
 
-**Response:**
+**Response**
 ```json
 {
   "status": "ok"
@@ -189,21 +193,21 @@ Register a rider and begin the search for an available driver.
 ```
 
 #### Cancel Rider
-**Endpoint:**
+**Endpoint**
 ``/rider/cancelRequest`` POST
 
-**Usage:**
+**Usage**
 
 Cancels the ride request and stops driver search.
 
-**Payload:**
+**Payload**
 ```json
 {
   "token": "<authorizationToken>"
 }
 ```
 
-**Response:**
+**Response**
 ```json
 {
   "status": "ok"
@@ -211,20 +215,20 @@ Cancels the ride request and stops driver search.
 ```
 
 #### Fetching Driver Assignment
-**Endpoint:**
+**Endpoint**
 ``/rider/fetchAssignment`` POST
 
-**Usage:**
+**Usage**
 
 Check if a driver has been assigned and fetch the corresponding route.
 
 ```json
 {
-  "token": "<authorizationToken>",
+  "token": "<authorizationToken>"
 }
 ```
 
-Response:
+**Response**
 - If a driver has not yet been assigned:
 ```json
 {
@@ -239,3 +243,28 @@ Response:
   "route": "<GeoJSON>"
 }
 ```
+
+## Socket.io API Reference
+### Shared
+#### Authentication
+**Event**
+``authenticate``
+
+**Payload**
+```json
+{
+  "token": "<authorizationToken>"
+}
+```
+
+**Response*
+- If the token is valid
+```json
+true
+```
+- If the token is invalid
+```json
+false
+```
+
+### Driver
