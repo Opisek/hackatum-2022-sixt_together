@@ -12,7 +12,7 @@
     - [Declining Rider Request](#declining-rider-request)
   - [Rider](#rider)
     - [Registering Rider](#registering-rider)
-    - [Unregister Rider](#unregister-rider)
+    - [Cancel Rider](#cancel-rider)
     - [Fetching Driver Assignment](#fetching-driver-assignment)
 
 ## Environment Variables
