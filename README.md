@@ -23,7 +23,7 @@
 
 Get an authorization token at the beginning of the session.
 
-**Response: **
+**Response:**
 ```json
 {
   "token": "<authorizationToken>"
@@ -39,7 +39,7 @@ Get an authorization token at the beginning of the session.
 
 Register a driver and get route coordinates.
 
-*Payload: **
+**Payload:**
 ```json
 {
   "token": "<authorizationToken>",
@@ -70,7 +70,7 @@ Register a driver and get route coordinates.
 
 Check if a rider request is pending.
 
-*Payload: **
+**Payload:**
 ```json
 {
   "token": "<authorizationToken>"
@@ -103,7 +103,7 @@ Check if a rider request is pending.
 
 Commit to picking up the pending rider.
 
-*Payload: **
+**Payload:**
 ```json
 {
   "token": "<authorizationToken>",
@@ -133,7 +133,7 @@ Commit to picking up the pending rider.
 
 Decline picking up the pending rider.
 
-*Payload: **
+**Payload:**
 ```json
 {
   "token": "<authorizationToken>",
