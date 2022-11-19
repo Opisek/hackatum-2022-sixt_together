@@ -15,6 +15,7 @@ module.exports = class Auth {
     }
 
     generateToken() {
+        console.log("token generated");
         return jwt.sign({ id: this._count++, timestamp: Date.now() }, this._secret);
     }
 

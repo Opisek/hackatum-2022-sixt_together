@@ -17,14 +17,23 @@ module.exports = class WebServer {
         server.use(express.json());
         server.use(bodyparser.json());
 
-        server.get("/rider/registerRequest", async (req, res) => res.json(await this._emit("riderRegisterRequest", req.body)));
-        server.get("/rider/fetchAssignment", async (req, res) => res.json(await this._emit("riderFetchAssignment", req.body)));
+        server.get("/rider/registerRequest", async (req, res) => sendJson(res, await this._emit("riderRegisterRequest", req.body)));
+        server.get("/rider/fetchAssignment", async (req, res) => sendJson(res, await this._emit("riderFetchAssignment", req.body)));
 
-        server.get("/driver/registerRequest", async (req, res) => res.json(await this._emit("driverRegisterRequest", req.body)));
+        server.get("/driver/registerRequest", async (req, res) => sendJson(res, await this._emit("driverRegisterRequest", req.body)));
 
-        server.get("/authenticate", async (req, res) => res.json(await this._emit("authenticate", req.body)));
+        server.get("/authenticate", async (req, res) => sendJson(res, await this._emit("authenticate", req.body)));
 
         server.listen(port);
         console.log("Webserver listening on " + port);
     }
+}
+
+function sendJson(res, json) {
+    res.setHeader("Access-Control-Allow-Origin", "*");
+    res.setHeader("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE");
+    res.setHeader("Access-Control-Allow-Headers", "Content-Type");
+    res.setHeader("Access-Control-Allow-Credentials", true);
+    res.set("Content-Type", "application/json"),
+    res.json(json);
 }
