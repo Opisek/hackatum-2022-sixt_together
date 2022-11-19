@@ -12,6 +12,7 @@
     - [Declining Rider Request](#declining-rider-request)
   - [Rider](#rider)
     - [Registering Rider](#registering-rider)
+    - [Unregister Rider](#unregister-rider)
     - [Fetching Driver Assignment](#fetching-driver-assignment)
 
 ## Environment Variables
@@ -177,6 +178,28 @@ Register a rider and begin the search for an available driver.
     "longitude": "<longitude>",
     "latitude": "<latitude>"
   }
+}
+```
+
+**Response:**
+```json
+{
+  "status": "ok"
+}
+```
+
+#### Cancel Rider
+**Endpoint:**
+``/rider/cancelRequest`` POST
+
+**Usage:**
+
+Cancels the ride request and stops driver search.
+
+**Payload:**
+```json
+{
+  "token": "<authorizationToken>"
 }
 ```
 
