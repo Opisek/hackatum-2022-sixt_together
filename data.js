@@ -39,15 +39,17 @@ module.exports = class Data {
         console.log("trying to match rider " + riderId + " with driver " + driverId);
         const rider = this._riders[riderId];
         const driver = this._drivers[driverId];
+        const currentRoute = driver.route;
         const alternativeRoute = await new Promise(res => this._emit("getRoute", [driver.begin, rider.begin, rider.end, driver.end], result => res(result)));
 
-        /*this._emit("queryDriver", {
+        this._emit("queryDriver", {
             driver: driverId,
-            rider: riderId
-        });*/
+            rider: riderId,
+            route: alternativeRoute
+        });
     }
 
-    async cancelRider(riderId, begin, end) {
+    async cancelRider(riderId) {
         delete this._riders[riderId];
     }
 

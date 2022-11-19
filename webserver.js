@@ -34,15 +34,20 @@ module.exports = class WebServer {
 
         server.get("/authenticate", async (req, res) => sendJson(res, await this._emit("authenticate", req.body)));
 
-        socketio(httpServer).on("connection", socket => {
+        socketio(httpServer, {
+            cors: {
+                origin: "*",
+                methods: ["GET", "POST"]
+            }
+        }).on("connection", socket => {
             console.log("driver socket connected");
             socket.on("disconnect", () => {
                 console.log("driver socket disconnected");
             });
-            socket.on("authenticate", async (data, callback) => {
-                const id = await this._emit("authenticate", req.body);
-                if (id == null) callback(false);
-                else {
+            socket.on("authenticate", async (data) => {
+                console.log("socketio auth");
+                const id = await this._emit("checkToken", data.token);
+                if (id != null) {
                     this._sockets[id] = socket;
                     callback(true);
                 }
@@ -51,6 +56,11 @@ module.exports = class WebServer {
 
         httpServer.listen(port);
         console.log("Webserver listening on " + port);
+    }
+
+    message(id, data) {
+        if (!(id in this._sockets)) return;
+        this._sockets[id].emit(data);
     }
 }
 

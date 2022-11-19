@@ -10,6 +10,7 @@ const dataManager = new (require("./data"))(process.env.ORS_KEY);
 
     // shared
     webServer.listen("authenticate", (data, callback) => callback(auth.generateToken()));
+    webServer.listen("checkToken", (data, callback) => callback(auth.verifyToken(data.token)));
 
     // driver
     webServer.listen("driverRegisterRequest", (data, callback) => auth.handle(data, callback, async (id, data, callback) => {
@@ -45,6 +46,10 @@ const dataManager = new (require("./data"))(process.env.ORS_KEY);
     dataManager.listen("queryDriver", async data => {
         console.log("query:");
         console.log(data);
+        webServer.message(data.driverId, {
+            riderId: data.riderId,
+            route: route
+        })
     });
 
     /*console.log("test");
