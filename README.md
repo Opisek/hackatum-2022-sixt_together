@@ -252,7 +252,7 @@ Check if a driver has been assigned and fetch the corresponding route.
 ``authenticate``
 
 **Initiator**
-``Driver client``
+Driver client
 
 **Payload**
 ```json
@@ -277,7 +277,7 @@ false
 ``riderRequest``
 
 **Initiator**
-``Server``
+Server
 
 **Payload**
 ```json
