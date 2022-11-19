@@ -1,6 +1,7 @@
 # hackatum-2022-sixt_together
 
 ## Table of Contents
+- [Environment Variables](#environment-variables)
 - [REST API Reference](#api-reference)
   - [Shared](#shared)
     - [Authentication](#authentication)
@@ -12,6 +13,13 @@
   - [Rider](#rider)
     - [Registering Rider](#registering-rider)
     - [Fetching Driver Assignment](#fetching-driver-assignment)
+
+## Environment Variables
+| Key | Usage |
+| --- | --- |
+| WEB_PORT | The web port that the API server binds to |
+| JWT_SECRET | The private key that the server uses for token generation |
+| ORS_KEY | Authentication token for using Openrouteservice |
 
 ## REST API Reference
 ### Shared
