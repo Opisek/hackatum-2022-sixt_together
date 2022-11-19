@@ -282,6 +282,7 @@ Server
 **Payload**
 ```json
 {
+  "rider": "<riderId>"
   "route": "<GeoJSON>"
 }
 ```
