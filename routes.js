@@ -4,15 +4,29 @@ module.exports = class Routes {
         this._unirest = require('unirest');
     }
 
-    async getRoute(points) {
+    /*async getRoute(points) {
+        const page = `https://api.openrouteservice.org/v2/directions/driving-car?${stringifyParameters(
+            {
+                api_key: this._key,
+                start: `${points[0].longitude},${points[0].latitude}`,
+                end: `${points[1].longitude},${points[1].latitude}`,
+            }
+        )}`;
+        console.log(page);
         return new Promise((res) => {
-            this._unirest.get(`https://api.openrouteservice.org/v2/directions/driving-car?${stringifyParameters(
-                {
-                    api_key: this._key,
-                    start: `${points[0].longitude},${points[0].latitude}`,
-                    end: `${points[1].longitude},${points[1].latitude}`,
-                }
-            )}`).then(result => res(result.body));
+            this._unirest.get(page).then(result => res(result.body));
+        })
+    }*/
+
+    async getRoute(points) {
+        let pointsArray = [];
+        for (let point of points) pointsArray.push([point.longitude, point.latitude]);
+        return new Promise(res => {
+            this._unirest
+            .post(`https://api.openrouteservice.org/v2/directions/driving-car/json`)
+            .headers({"Authorization": this._key, "Accept": "application/json", "Content-Type": "application/json"})
+            .send({coordinates: pointsArray})
+            .then(result => res(result.body));
         })
     }
 }
