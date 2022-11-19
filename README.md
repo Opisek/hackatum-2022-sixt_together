@@ -15,9 +15,9 @@
     - [Cancel Rider](#cancel-rider)
     - [Fetching Driver Assignment](#fetching-driver-assignment)
 - [Socket.io API Reference](#socketio-api-reference)
- - [Shared](#shared-1)
-  - [Authentication](#authentication-1)
- - [Driver](#driver-1)
+  - [Shared](#shared-1)
+    - [Authentication](#authentication-1)
+  - [Driver](#driver-1)
 
 ## Environment Variables
 | Key | Usage |
