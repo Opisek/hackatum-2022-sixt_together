@@ -7,6 +7,7 @@ module.exports = class Data {
     }
 
     constructor() {
+        this._events = {};
         this._drivers = {};
         this._riders = {};
     }
@@ -21,8 +22,10 @@ module.exports = class Data {
         };
     }
 
-    async registerRider(id, begin, end) {
-        this._riders[id] = {
+    async registerRider(riderId, begin, end) {
+        if (riderId in this._riders) return;
+
+        this._riders[riderId] = {
             begin: begin,
             end: end,
             assigned: null
@@ -30,10 +33,10 @@ module.exports = class Data {
         let routesDone = 0;
         let routesNeeded = drivers.length;
         let routes = [];
-        for (let driverId of Object.keys(this._drivers)) {
+        for (const [driverId, driver] of Object.entries(this._drivers)) {
             routes.push(null);
-            const driver = this._drivers[driverId];
             this._emit(findRoute, [driver.begin, begin, end, driver.end], result => {
+                console.log("rider route");
                 routes[driverId] = result;
                 routesDone++;
             });
@@ -45,7 +48,15 @@ module.exports = class Data {
                     res();
                 }
             }, 100);
-        })
+        });
+
+        let viableRoutes = [];
+        for (const [driverId, route] of Objeck.entries(routes)) {
+            this._emit("queryDriver", {
+                driver: driverId,
+                rider: riderId
+            });
+        }
         // find a suitable driver for the rider here or send a sixt employee
     }
 

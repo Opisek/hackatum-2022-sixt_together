@@ -6,24 +6,32 @@ const dataManager = new (require("./data"))(process.env.ORS_KEY);
 (async () => {
     console.log("Server started");
 
+    // shared
     webServer.listen("authenticate", (data, callback) => callback(auth.generateToken()));
 
-    webServer.listen("riderRegisterRequest", (data, callback) => auth.handle(data, callback, async (id, data, callback) => {
-        callback({ status: "ok" });
-    }));
-    webServer.listen("riderFetchAssignment", (data, callback) => auth.handle(data, callback, async (id, data, callback) => {
-        callback(success({ status: "ok" }));
-    }));
-
+    // driver
     webServer.listen("driverRegisterRequest", (data, callback) => auth.handle(data, callback, async (id, data, callback) => {
         const route = await routes.getRoute([data.begin, data.end]);
         dataManager.registerDriver(id, data.begin, data.end, route);
-
-        callback({
-            status: "ok",
-            route: route
-        });
+        
+        callback({ status: "ok", route: route});
     }));
+    
+    // rider
+    webServer.listen("riderRegisterRequest", (data, callback) => auth.handle(data, callback, async (id, data, callback) => {
+        dataManager.registerRider(data.token, data.begin, data.end);
+        callback({ status: "ok" });
+    }));
+    webServer.listen("riderFetchAssignment", (data, callback) => auth.handle(data, callback, async (id, data, callback) => {
+        callback({ status: "ok", route: dataManager.getRiderAssignment(id)});
+    }));
+    
+    // driver + rider
+    dataManager.listen("getRoute", async (data, callback) => callback(await routes.getRoute(data)));
+    dataManager.listen("queryDriver", async (data, callback) => {
+        console.log("query:");
+        console.log(data);
+    });
 
     /*console.log("test");
     console.log(JSON.stringify(await routes.getRoute([

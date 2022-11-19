@@ -21,13 +21,14 @@ module.exports = class Routes {
     async getRoute(points) {
         let pointsArray = [];
         for (let point of points) pointsArray.push([point.longitude, point.latitude]);
-        return new Promise(res => {
+        let result = await new Promise(res => {
             this._unirest
             .post(`https://api.openrouteservice.org/v2/directions/driving-car/json`)
-            .headers({"Authorization": this._key, "Accept": "application/json", "Content-Type": "application/json"})
+            .headers({"Authorization": this._key, "Content-Type": "application/json"})
             .send({coordinates: pointsArray})
             .then(result => res(result.body));
-        })
+        });
+        return result;
     }
 }
 
