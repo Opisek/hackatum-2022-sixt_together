@@ -1,0 +1,26 @@
+{
+  "name": "hackatum-2022-sixt_together",
+  "version": "1.0.0",
+  "description": "",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Opisek/hackatum-2022-sixt_together.git"
+  },
+  "author": "Kacper Darowski",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Opisek/hackatum-2022-sixt_together/issues"
+  },
+  "homepage": "https://github.com/Opisek/hackatum-2022-sixt_together#readme",
+  "dependencies": {
+    "body-parser": "^1.20.1",
+    "dotenv": "^16.0.3",
+    "express.js": "^1.0.0",
+    "jsonwebtoken": "^8.5.1",
+    "unirest": "^0.6.0"
+  }
+}
