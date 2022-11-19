@@ -1,7 +1,7 @@
 # hackatum-2022-sixt_together
 
 ## Table of Contents
-- [API Reference](#api-reference)
+- [REST API Reference](#api-reference)
   - [Shared](#shared)
     - [Authentication](#authentication)
   - [Driver](#driver)
@@ -13,7 +13,7 @@
     - [Registering Rider](#registering-rider)
     - [Fetching Driver Assignment](#fetching-driver-assignment)
 
-## API Reference
+## REST API Reference
 ### Shared
 #### Authentication
 **Endpoint:**
