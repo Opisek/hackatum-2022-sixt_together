@@ -18,6 +18,7 @@
   - [Shared](#shared-1)
     - [Authentication](#authentication-1)
   - [Driver](#driver-1)
+    - [Fetching Rider Request](#fetching-rider-request-1)
 
 ## Environment Variables
 | Key | Usage |
@@ -250,6 +251,9 @@ Check if a driver has been assigned and fetch the corresponding route.
 **Event**
 ``authenticate``
 
+**Initiator**
+``Driver client``
+
 **Payload**
 ```json
 {
@@ -268,3 +272,16 @@ false
 ```
 
 ### Driver
+#### Fetching Rider Request
+**Event**
+``riderRequest``
+
+**Initiator**
+``Server``
+
+**Payload**
+```json
+{
+  "route": "<GeoJSON>"
+}
+```
