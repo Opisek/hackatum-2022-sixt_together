@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <script src="/socket.io/socket.io.js"></script>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet"> 
+    <title>SIXT together</title>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.3/dist/leaflet.css"
+    integrity="sha256-kLaT2GOSpHechhsozzB+flnD+zUyjE2LlfWPgU04xyI="
+    crossorigin="">
+    <script src="https://unpkg.com/leaflet@1.9.3/dist/leaflet.js"
+    integrity="sha256-WBkoXOwTeyKclOHuWtc+i2uENFpDZ9YPdf5Hf+D7ewM="
+    crossorigin=""></script>
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+    <nav><img src="/images/logo.png"></nav>
+    <main>
+        <div id="map"></div>
+    </main>
+    <footer id="searchFooter" class="visible">
+        <input placeholder="From" id="inputFrom" list="autocompleteFrom">
+        <datalist id="autocompleteFrom">
+        </datalist>
+        <input placeholder="To" id="inputTo" list="autocompleteTo">
+        <datalist id="autocompleteTo">
+        </datalist>
+        <button id="submitButton" class="accent">Search</button>
+    </footer>
+    <footer id="riderFooter" class="">
+        <span id="pickupQuery">Pick up rider for 20€?</span>
+        <button id="acceptButton" class="accent">Accept</button>
+        <button id="declineButton">Decline</button>
+    </footer>
+    <script type="text/javascript" src="/js/map.js"></script>
+</body>
+</html>

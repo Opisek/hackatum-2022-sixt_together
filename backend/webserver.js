@@ -29,30 +29,11 @@ module.exports = class WebServer {
         server.post("/rider/fetchAssignment", async (req, res) => sendJson(res, await this._emit("riderFetchAssignment", req.body)));
 
         server.post("/driver/registerRequest", async (req, res) => sendJson(res, await this._emit("driverRegisterRequest", req.body)));
+        server.post("/driver/fetchRider", async (req, res) => sendJson(res, await this._emit("driverFetchRider", req.body)));
         server.post("/driver/acceptRider", async (req, res) => sendJson(res, await this._emit("driverAcceptRider", req.body)));
         server.post("/driver/declineRider", async (req, res) => sendJson(res, await this._emit("driverDeclineRider", req.body)));
 
         server.get("/authenticate", async (req, res) => sendJson(res, await this._emit("authenticate", req.body)));
-
-        socketio(httpServer, {
-            cors: {
-                origin: "*",
-                methods: ["GET", "POST"]
-            }
-        }).on("connection", socket => {
-            console.log("driver socket connected");
-            socket.on("disconnect", () => {
-                console.log("driver socket disconnected");
-            });
-            socket.on("authenticate", async (data) => {
-                console.log("socketio auth");
-                const id = await this._emit("checkToken", data.token);
-                if (id != null) {
-                    this._sockets[id] = socket;
-                    callback(true);
-                }
-            });
-        });
 
         httpServer.listen(port);
         console.log("Webserver listening on " + port);

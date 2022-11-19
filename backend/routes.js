@@ -20,7 +20,7 @@ module.exports = class Routes {
 
     async getRoute(points) {
         let pointsArray = [];
-        for (let point of points) pointsArray.push([point.longitude, point.latitude]);
+        for (let point of points) if (point != undefined) pointsArray.push([point.longitude, point.latitude]);
         let result = await new Promise(res => {
             this._unirest
             .post(`https://api.openrouteservice.org/v2/directions/driving-car/json`)

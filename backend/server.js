@@ -14,9 +14,8 @@ const dataManager = new (require("./data"))(process.env.ORS_KEY);
 
     // driver
     webServer.listen("driverRegisterRequest", (data, callback) => auth.handle(data, callback, async (id, data, callback) => {
-        const route = await routes.getRoute([data.begin, data.end]);
+        const route = await routes.getRoute([data.begin, data.end])
         dataManager.registerDriver(id, data.begin, data.end, route);
-        
         callback({ status: "ok", route: route});
     }));
     webServer.listen("driverAcceptRider", (data, callback) => auth.handle(data, callback, async (id, data, callback) => {
@@ -42,15 +41,16 @@ const dataManager = new (require("./data"))(process.env.ORS_KEY);
     }));
     
     // driver + rider
-    dataManager.listen("getRoute", async (data, callback) => {console.log("getting shared route");callback(await routes.getRoute(data));});
-    dataManager.listen("queryDriver", async data => {
+    dataManager.listen("getRoute", async (data, callback) => callback(await routes.getRoute(data)));
+    webServer.listen("driverFetchRider", async (data, callback) => auth.handle(data, callback, async (id, data, callback) => callback(dataManager.fetchRiderSuggestion(id, data, callback))));
+    /*dataManager.listen("queryDriver", async data => {
         console.log("query:");
         console.log(data);
         webServer.message(data.driverId, {
             riderId: data.riderId,
             route: route
         })
-    });
+    });*/
 
     /*console.log("test");
     console.log(JSON.stringify(await routes.getRoute([
