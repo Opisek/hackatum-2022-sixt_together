@@ -16,6 +16,14 @@ const dataManager = new (require("./data"))(process.env.ORS_KEY);
         
         callback({ status: "ok", route: route});
     }));
+    webServer.listen("driverAcceptRider", (data, callback) => auth.handle(data, callback, async (id, data, callback) => {
+        if (dataManager.acceptRider(id, data.rider)) callback({ status: "ok" });
+        else callback({ status: "expired" });
+    }));
+    webServer.listen("driverDeclineRider", (data, callback) => auth.handle(data, callback, async (id, data, callback) => {
+        dataManager.declineRider(id, data.rider)
+        callback({ status: "ok" });
+    }));
     
     // rider
     webServer.listen("riderRegisterRequest", (data, callback) => auth.handle(data, callback, async (id, data, callback) => {

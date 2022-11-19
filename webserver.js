@@ -26,6 +26,8 @@ module.exports = class WebServer {
         server.post("/rider/fetchAssignment", async (req, res) => sendJson(res, await this._emit("riderFetchAssignment", req.body)));
 
         server.post("/driver/registerRequest", async (req, res) => sendJson(res, await this._emit("driverRegisterRequest", req.body)));
+        server.post("/driver/acceptRider", async (req, res) => sendJson(res, await this._emit("driverAcceptRider", req.body)));
+        server.post("/driver/declineRider", async (req, res) => sendJson(res, await this._emit("driverDeclineRider", req.body)));
 
         server.get("/authenticate", async (req, res) => sendJson(res, await this._emit("authenticate", req.body)));
 

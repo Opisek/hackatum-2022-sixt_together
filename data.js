@@ -30,39 +30,33 @@ module.exports = class Data {
             end: end,
             assigned: null
         };
-        let routesDone = 0;
-        let routesNeeded = this._drivers.length;
-        let routes = [];
-        for (const [driverId, driver] of Object.entries(this._drivers)) {
-            console.log("trying " + driverId);
-            routes.push(null);
-            this._emit("getRoute", [driver.begin, begin, end, driver.end], result => {
-                console.log("rider route");
-                routes[driverId] = result;
-                routesDone++;
-            });
-        }
-        await new Promise(res => {
-            let interval = setInterval(() => {
-                if (routesDone == routesNeeded) {
-                    clearInterval(interval);
-                    res();
-                }
-            }, 100);
-        });
 
-        let viableRoutes = [];
-        for (const [driverId, route] of Objeck.entries(routes)) {
-            this._emit("queryDriver", {
-                driver: driverId,
-                rider: riderId
-            });
-        }
-        // find a suitable driver for the rider here or send a sixt employee
+        for (const driverId of Object.keys(this._drivers)) this._proposeRider(riderId, driverId);
+    }
+
+    async _proposeRider(riderId, driverId) {
+        console.log("trying to match rider " + riderId + " with driver " + driverId);
+        const currentRoute = this._drivers[driverId];
+        const alternativeRoute = await new Promise(res => this._emit("getRoute", [driver.begin, begin, end, driver.end], result => res(result)));
+
+        /*this._emit("queryDriver", {
+            driver: driverId,
+            rider: riderId
+        });*/
     }
 
     async cancelRider(riderId, begin, end) {
         delete this._riders[riderId];
+    }
+
+    acceptRider(driverId, riderId) {
+        if (!(riderId in this._riders) || this._riders[riderId].assigned != null) return false;
+        this._riders[riderId].assigned = driverId;
+        return true;
+    }
+
+    cancelRider(driverId, riderId) {
+
     }
 
     getRiderAssignment(id) {
