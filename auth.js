@@ -15,7 +15,6 @@ module.exports = class Auth {
     }
 
     generateToken() {
-        console.log("token generated");
         return jwt.sign({ id: this._count++, timestamp: Date.now() }, this._secret);
     }
 
@@ -28,7 +27,7 @@ module.exports = class Auth {
     }
 
     handle(data, response, callback) {
-        const id = auth.verifyToken(data.token);
+        const id = this.verifyToken(data.token);
         if (id == null) {
             response({ status: "error", message: "Must provide a valid token" });
             return;
