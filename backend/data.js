@@ -23,6 +23,8 @@ module.exports = class Data {
             socket: null,
             suggestion: null
         };
+
+        for (const riderId of Object.keys(this._riders)) if (this._riders[riderId].assigned == null) this._proposeRider(riderId, id);
     }
 
     async registerRider(riderId, begin, end) {
