@@ -22,6 +22,7 @@ module.exports = class WebServer {
         server.use(bodyparser.json());
 
         server.post("/rider/registerRequest", async (req, res) => sendJson(res, await this._emit("riderRegisterRequest", req.body)));
+        server.post("/rider/cancelRequest", async (req, res) => sendJson(res, await this._emit("riderRegisterRequest", req.body)));
         server.post("/rider/fetchAssignment", async (req, res) => sendJson(res, await this._emit("riderFetchAssignment", req.body)));
 
         server.post("/driver/registerRequest", async (req, res) => sendJson(res, await this._emit("driverRegisterRequest", req.body)));

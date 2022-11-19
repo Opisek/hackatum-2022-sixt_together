@@ -31,11 +31,12 @@ module.exports = class Data {
             assigned: null
         };
         let routesDone = 0;
-        let routesNeeded = drivers.length;
+        let routesNeeded = this._drivers.length;
         let routes = [];
         for (const [driverId, driver] of Object.entries(this._drivers)) {
+            console.log("trying " + driverId);
             routes.push(null);
-            this._emit(findRoute, [driver.begin, begin, end, driver.end], result => {
+            this._emit("getRoute", [driver.begin, begin, end, driver.end], result => {
                 console.log("rider route");
                 routes[driverId] = result;
                 routesDone++;
@@ -58,6 +59,10 @@ module.exports = class Data {
             });
         }
         // find a suitable driver for the rider here or send a sixt employee
+    }
+
+    async cancelRider(riderId, begin, end) {
+        delete this._riders[riderId];
     }
 
     getRiderAssignment(id) {

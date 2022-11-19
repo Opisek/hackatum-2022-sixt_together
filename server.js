@@ -22,13 +22,17 @@ const dataManager = new (require("./data"))(process.env.ORS_KEY);
         dataManager.registerRider(data.token, data.begin, data.end);
         callback({ status: "ok" });
     }));
+    webServer.listen("riderCancelRequest", (data, callback) => auth.handle(data, callback, async (id, data, callback) => {
+        dataManager.cancelRider(data.token);
+        callback({ status: "ok" });
+    }));
     webServer.listen("riderFetchAssignment", (data, callback) => auth.handle(data, callback, async (id, data, callback) => {
         callback({ status: "ok", route: dataManager.getRiderAssignment(id)});
     }));
     
     // driver + rider
-    dataManager.listen("getRoute", async (data, callback) => callback(await routes.getRoute(data)));
-    dataManager.listen("queryDriver", async (data, callback) => {
+    dataManager.listen("getRoute", async (data, callback) => {console.log("getting shared route");callback(await routes.getRoute(data));});
+    dataManager.listen("queryDriver", async data => {
         console.log("query:");
         console.log(data);
     });
