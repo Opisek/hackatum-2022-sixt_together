@@ -8,23 +8,14 @@ const data = new (require("./data"))(process.env.ORS_KEY);
 
     webServer.listen("authenticate", (data, callback) => callback(auth.generateToken()));
 
-    webServer.listen("riderRegisterRequest", (data, callback) => {
-        const id = auth.verifyToken(data.token);
-        if (id == null) {
-            callback(error("Must provide a valid token"));
-            return;
-        }
-
+    webServer.listen("riderRegisterRequest", (data, callback) => auth.handle(data, callback, (id, data, callback) => {
         callback(success());
-    });
+    }));
+    webServer.listen("riderFetchAssignment", (data, callback) => auth.handle(data, callback, (id, data, callback) => {
+        callback(success());
+    }));
 
-    webServer.listen("driverRegisterRequest", async (data, callback) => {
-        const id = auth.verifyToken(data.token);
-        if (id == null) {
-            callback(error("Must provide a valid token"));
-            return;
-        }
-
+    webServer.listen("driverRegisterRequest", (data, callback) => auth.handle(data, callback, (id, data, callback) => {
         const route = await routes.getRoute([data.begin, data.end]);
         data.registerDriver(id, data.begin, data.end, route);
 
@@ -32,7 +23,7 @@ const data = new (require("./data"))(process.env.ORS_KEY);
             status: "ok",
             route: route
         });
-    });
+    }));
 
     /*console.log("test");
     console.log(JSON.stringify(await routes.getRoute([
@@ -46,11 +37,3 @@ const data = new (require("./data"))(process.env.ORS_KEY);
         }
     ])));*/
 })();
-
-function error(message) {
-    return { status: "error", message: message };
-}
-function success(message = null) {
-    if (message) return { status: "ok", message: message };
-    else return { status: "ok" };
-}

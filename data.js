@@ -18,6 +18,13 @@ module.exports = class Data {
         this._riders[id] = {
             begin: begin,
             end: end,
+            assigned: null
         };
+        // find a suitable driver for the rider here or send a sixt employee
+    }
+
+    getRiderAssignment(id) {
+        if (!(id in this._riders) || this._riders[id].assigned == null) return null;
+        return this._drivers[this._riders[id].assigned].route;
     }
 }

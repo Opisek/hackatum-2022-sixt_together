@@ -25,4 +25,13 @@ module.exports = class Auth {
             return null;
         }
     }
+
+    handle(data, response, callback) {
+        const id = auth.verifyToken(data.token);
+        if (id == null) {
+            response({ status: "error", message: "Must provide a valid token" });
+            return;
+        }
+        callback(id, data, response);
+    }
 };

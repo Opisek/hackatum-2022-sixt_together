@@ -18,12 +18,13 @@ module.exports = class WebServer {
         server.use(bodyparser.json());
 
         server.get("/rider/registerRequest", async (req, res) => res.json(await this._emit("riderRegisterRequest", req.body)));
+        server.get("/rider/fetchAssignment", async (req, res) => res.json(await this._emit("riderFetchAssignment", req.body)));
 
         server.get("/driver/registerRequest", async (req, res) => res.json(await this._emit("driverRegisterRequest", req.body)));
 
         server.get("/authenticate", async (req, res) => res.json(await this._emit("authenticate", req.body)));
 
         server.listen(port);
-        console.log("listening on " + port);
+        console.log("Webserver listening on " + port);
     }
 }
