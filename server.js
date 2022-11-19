@@ -1,3 +1,5 @@
+require("dotenv").config();
+
 const webServer = new (require("./webserver"))(process.env.WEB_PORT);
 const auth = new (require("./auth"))(process.env.JWT_SECRET);
 const routes = new (require("./routes"))(process.env.ORS_KEY);
@@ -27,11 +29,11 @@ const dataManager = new (require("./data"))(process.env.ORS_KEY);
     
     // rider
     webServer.listen("riderRegisterRequest", (data, callback) => auth.handle(data, callback, async (id, data, callback) => {
-        dataManager.registerRider(data.token, data.begin, data.end);
+        dataManager.registerRider(id, data.begin, data.end);
         callback({ status: "ok" });
     }));
     webServer.listen("riderCancelRequest", (data, callback) => auth.handle(data, callback, async (id, data, callback) => {
-        dataManager.cancelRider(data.token);
+        dataManager.cancelRider(id);
         callback({ status: "ok" });
     }));
     webServer.listen("riderFetchAssignment", (data, callback) => auth.handle(data, callback, async (id, data, callback) => {

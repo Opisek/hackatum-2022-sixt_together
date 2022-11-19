@@ -1,5 +1,3 @@
-require("dotenv").config();
-
 module.exports = class WebServer {
     listen(name, callback) { this._events[name] = callback; }
 
@@ -12,14 +10,19 @@ module.exports = class WebServer {
     
     constructor(port) {
         this._events = {};
+        this._sockets = {};
 
+        const http = require("http");
         const express = require("express");
+        const socketio = require("socket.io");
         const server = express();
         const bodyparser = require("body-parser");
         const cors = require("cors");
         server.use(cors());
         server.use(express.json());
         server.use(bodyparser.json());
+
+        const httpServer = http.createServer(server);
 
         server.post("/rider/registerRequest", async (req, res) => sendJson(res, await this._emit("riderRegisterRequest", req.body)));
         server.post("/rider/cancelRequest", async (req, res) => sendJson(res, await this._emit("riderRegisterRequest", req.body)));
@@ -31,7 +34,22 @@ module.exports = class WebServer {
 
         server.get("/authenticate", async (req, res) => sendJson(res, await this._emit("authenticate", req.body)));
 
-        server.listen(port);
+        socketio(httpServer).on("connection", socket => {
+            console.log("driver socket connected");
+            socket.on("disconnect", () => {
+                console.log("driver socket disconnected");
+            });
+            socket.on("authenticate", async (data, callback) => {
+                const id = await this._emit("authenticate", req.body);
+                if (id == null) callback(false);
+                else {
+                    this._sockets[id] = socket;
+                    callback(true);
+                }
+            });
+        });
+
+        httpServer.listen(port);
         console.log("Webserver listening on " + port);
     }
 }

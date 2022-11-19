@@ -18,7 +18,8 @@ module.exports = class Data {
             end: end,
             route: route,
             occupied: false,
-            position: begin
+            position: begin,
+            socket: null
         };
     }
 
@@ -36,8 +37,9 @@ module.exports = class Data {
 
     async _proposeRider(riderId, driverId) {
         console.log("trying to match rider " + riderId + " with driver " + driverId);
-        const currentRoute = this._drivers[driverId];
-        const alternativeRoute = await new Promise(res => this._emit("getRoute", [driver.begin, begin, end, driver.end], result => res(result)));
+        const rider = this._riders[riderId];
+        const driver = this._drivers[driverId];
+        const alternativeRoute = await new Promise(res => this._emit("getRoute", [driver.begin, rider.begin, rider.end, driver.end], result => res(result)));
 
         /*this._emit("queryDriver", {
             driver: driverId,
