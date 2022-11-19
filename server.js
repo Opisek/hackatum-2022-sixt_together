@@ -8,14 +8,14 @@ const data = new (require("./data"))(process.env.ORS_KEY);
 
     webServer.listen("authenticate", (data, callback) => callback(auth.generateToken()));
 
-    webServer.listen("riderRegisterRequest", (data, callback) => auth.handle(data, callback, (id, data, callback) => {
+    webServer.listen("riderRegisterRequest", (data, callback) => auth.handle(data, callback, async (id, data, callback) => {
         callback(success());
     }));
-    webServer.listen("riderFetchAssignment", (data, callback) => auth.handle(data, callback, (id, data, callback) => {
+    webServer.listen("riderFetchAssignment", (data, callback) => auth.handle(data, callback, async (id, data, callback) => {
         callback(success());
     }));
 
-    webServer.listen("driverRegisterRequest", (data, callback) => auth.handle(data, callback, (id, data, callback) => {
+    webServer.listen("driverRegisterRequest", (data, callback) => auth.handle(data, callback, async (id, data, callback) => {
         const route = await routes.getRoute([data.begin, data.end]);
         data.registerDriver(id, data.begin, data.end, route);
 
