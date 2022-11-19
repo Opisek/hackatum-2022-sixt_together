@@ -1,25 +1,27 @@
 # hackatum-2022-sixt_together
-
 ## Table of Contents
-- [Environment Variables](#environment-variables)
-- [REST API Reference](#rest-api-reference)
-  - [Shared](#shared)
-    - [Authentication](#authentication)
-  - [Driver](#driver)
-    - [Registering Driver](#registering-driver)
-    - [Fetching Rider Request](#fetching-rider-request)
-    - [Accepting Rider Request](#accepting-rider-request)
-    - [Declining Rider Request](#declining-rider-request)
-  - [Rider](#rider)
-    - [Registering Rider](#registering-rider)
-    - [Cancel Rider](#cancel-rider)
-    - [Fetching Driver Assignment](#fetching-driver-assignment)
-- [Socket.io API Reference](#socketio-api-reference)
-  - [Shared](#shared-1)
-    - [Authentication](#authentication-1)
-  - [Driver](#driver-1)
-    - [Fetching Rider Request](#fetching-rider-request-1)
+- [Backend](#backend)
+  - [Environment Variables](#environment-variables)
+  - [REST API Reference](#rest-api-reference)
+    - [Shared](#shared)
+      - [Authentication](#authentication)
+    - [Driver](#driver)
+      - [Registering Driver](#registering-driver)
+      - [Fetching Rider Request](#fetching-rider-request)
+      - [Accepting Rider Request](#accepting-rider-request)
+      - [Declining Rider Request](#declining-rider-request)
+    - [Rider](#rider)
+      - [Registering Rider](#registering-rider)
+      - [Cancel Rider](#cancel-rider)
+      - [Fetching Driver Assignment](#fetching-driver-assignment)
+  - [Socket.io API Reference](#socketio-api-reference)
+    - [Shared](#shared-1)
+      - [Authentication](#authentication-1)
+    - [Driver](#driver-1)
+      - [Fetching Rider Request](#fetching-rider-request-1)
+- [Driver Frontend](#driver-frontend)
 
+# Backend
 ## Environment Variables
 | Key | Usage |
 | --- | --- |
@@ -286,3 +288,11 @@ Server
   "route": "<GeoJSON>"
 }
 ```
+
+# Driver Frontend
+## Environment Variables
+| Key | Usage |
+| --- | --- |
+| WEB_PORT | The web port that the API server binds to |
+| ORS_KEY | Authentication token for using Openrouteservice |
+| SERVER | The address of the backend server |
