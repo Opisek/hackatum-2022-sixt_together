@@ -27,7 +27,7 @@ socketio(httpServer).on("connection", socket => {
     socket.on("autocomplete", async (data, callback) => {
         callback(await new Promise(res => {
             unirest
-            .get(`https://api.openrouteservice.org/geocode/autocomplete?api_key=${process.env.ORS_KEY}&text=${data}`)
+            .get(`https://api.openrouteservice.org/geocode/autocomplete?api_key=${process.env.ORS_KEY}&text=${data}&boundary.country=DE`)
             .then(result => {
                 if (result.body.features == undefined) res([]);
                 else res(result.body.features.map(element => {return {name: element.properties.name, latitude: element.geometry.coordinates[0], longitude: element.geometry.coordinates[1]};}))

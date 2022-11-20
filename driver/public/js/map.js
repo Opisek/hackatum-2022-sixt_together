@@ -58,8 +58,8 @@ window.addEventListener("load", async () => {
                 autocompleteValues[suggestion.name] = {longitude: suggestion.longitude, latitude: suggestion.latitude};
                 if (first) {
                     from = {
-                        longitude: suggestion.longitude,
-                        latitude: suggestion.latitude
+                        longitude: suggestion.latitude,
+                        latitude: suggestion.longitude
                     }
                 }
                 first = false;
@@ -78,8 +78,8 @@ window.addEventListener("load", async () => {
                 autocompleteTo.appendChild(option);
                 if (first) {
                     to = {
-                        longitude: suggestion.longitude,
-                        latitude: suggestion.latitude
+                        longitude: suggestion.latitude,
+                        latitude: suggestion.longitude
                     }
                 }
                 first = false;
@@ -89,7 +89,7 @@ window.addEventListener("load", async () => {
 
     submitButton.addEventListener("click", () => {
         document.getElementById("searchFooter").classList.remove("visible");
-
+        
         socket.emit("submit", { token: token, begin: from, end: to }, result => {
             let myStyle = {
                 "color": "#37c4ef",
