@@ -4,6 +4,7 @@
   - [Table of Contents](#table-of-contents)
   - [Abstract](#abstract)
   - [Tech Stack](#tech-stack)
+  - [Futere Prospect](#future-prospect)
 - [Backend](#backend)
   - [Environment Variables](#environment-variables)
   - [REST API Reference](#rest-api-reference)
@@ -32,7 +33,7 @@ The project consists of three parts:
 - A Node.js emulation of a possible SIXT [car dashboard](#driver-frontend) for the driver (SIXT Rent or SIXT Share user) complete with navigation and rider pick-up dialogues
 - A Flutter mobile application for riders to pick and request their rides
 
-## Futere Prospect
+## Future Prospect
 SIXT together is full of potential for possible future developements. The following are a few ideas for possible features:
 - Utilizing Minimal Weight Edmond's Blossom Algorithm to efficiently assign riders to potental drivers
 - Calculating and displaying the driver's arrival time on the rider's phone application
