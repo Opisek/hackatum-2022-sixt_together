@@ -19,6 +19,7 @@
       - [Cancel Rider](#cancel-rider)
       - [Fetching Driver Assignment](#fetching-driver-assignment)
 - [Driver Frontend](#driver-frontend)
+- [Rider Frontend](#rider-frontend)
 
 ## Abstract
 This project has been developed during the 2022 hackaTUM event as a proposed solution to the SIXT challange concerning incentivizing car renting services to reduce car ownership rates and work towards a more sustainable future, whilst at the same time combating the issue of long recharge times plaguing electric vehicles.
@@ -294,3 +295,7 @@ This webserver meant to be ran locally serves as a concept for a possible car da
 | WEB_PORT | The web port that the API server binds to | e.g. 8080 |
 | ORS_KEY | Authentication token for using Openrouteservice (the functionality using this service should technically be migrated into the backend or realized using a local database) | Obtainable at [Openrouteservice](https://openrouteservice.org/) |
 | SERVER | The address of the backend server | e.g. https://localhost |
+
+# Rider Frontend
+A cross-plattform application for riders to request transport.
+This part of the project can be found in [this repository](https://github.com/KevinGruber2001/st-rider).
