@@ -25,7 +25,7 @@
 ## Abstract
 This project has been developed during the 2022 hackaTUM event as a proposed solution to the SIXT challange concerning incentivizing car renting services to reduce car ownership rates and work towards a more sustainable future, whilst at the same time combating the issue of long recharge times plaguing electric vehicles.
 
-The core idea is to let SIXT Rent and SIXT Share clients reduce their bill by picking up SIXT Ride users on their way. We believe that this would reduce the effective amount of cars traversing the streets, as no dedicated SIXT Ride drivers would need to be dispatched. This allows the rest of the electric or hybrid fleet to recharge fully without the worry of leaving clients waiting.
+The core idea is to let SIXT Rent and SIXT Share clients reduce their bill by dynamically picking up SIXT Ride users on their way. We believe that this would reduce the effective amount of cars traversing the streets, as no dedicated SIXT Ride drivers would need to be dispatched. This allows the rest of the electric or hybrid fleet to recharge fully without the worry of leaving clients waiting.
 
 ## Tech Stack
 The project consists of three parts:
