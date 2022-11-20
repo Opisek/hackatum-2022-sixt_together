@@ -10,19 +10,15 @@ module.exports = class WebServer {
     
     constructor(port) {
         this._events = {};
-        this._sockets = {};
 
         const http = require("http");
         const express = require("express");
-        const socketio = require("socket.io");
         const server = express();
         const bodyparser = require("body-parser");
         const cors = require("cors");
         server.use(cors());
         server.use(express.json());
         server.use(bodyparser.json());
-
-        const httpServer = http.createServer(server);
 
         server.post("/rider/registerRequest", async (req, res) => sendJson(res, await this._emit("riderRegisterRequest", req.body)));
         server.post("/rider/cancelRequest", async (req, res) => sendJson(res, await this._emit("riderRegisterRequest", req.body)));
@@ -35,13 +31,8 @@ module.exports = class WebServer {
 
         server.get("/authenticate", async (req, res) => sendJson(res, await this._emit("authenticate", req.body)));
 
-        httpServer.listen(port);
+        server.listen(port);
         console.log("Webserver listening on " + port);
-    }
-
-    message(id, data) {
-        if (!(id in this._sockets)) return;
-        this._sockets[id].emit(data);
     }
 }
 
