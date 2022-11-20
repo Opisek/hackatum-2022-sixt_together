@@ -55,8 +55,9 @@ SIXT together is full of potential for possible future developements. The follow
 <img src="https://user-images.githubusercontent.com/40141286/202893657-8a2bb89d-03aa-445d-8378-56c931ae4be1.png" alt="rider3" width=30%>
 
 ## Videos
-https://user-images.githubusercontent.com/40141286/202893895-6ba67dc1-da66-497a-9953-6698d3daae24.mov
-https://user-images.githubusercontent.com/40141286/202893896-ed6b49c0-de30-4693-9d40-e1719320395d.mov
+[Driver](https://user-images.githubusercontent.com/40141286/202893896-ed6b49c0-de30-4693-9d40-e1719320395d.mov)
+
+[Rider](https://user-images.githubusercontent.com/40141286/202893895-6ba67dc1-da66-497a-9953-6698d3daae24.mov)
 
 # Backend
 The backend server coordinates the communication between drivers and riders via a RESTful API and utilizes Openrouteservice for route calculation.
