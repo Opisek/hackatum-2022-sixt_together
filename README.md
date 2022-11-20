@@ -29,6 +29,8 @@ This project has been developed during the 2022 hackaTUM event as a proposed sol
 
 The core idea is to let SIXT Rent and SIXT Share clients reduce their bill by dynamically picking up SIXT Ride users on their way. We believe that this would reduce the effective amount of cars traversing the streets, as no dedicated SIXT Ride drivers would need to be dispatched. This allows the rest of the electric or hybrid fleet to recharge fully without the worry of leaving clients waiting.
 
+More information can be found on the [Devpost](https://devpost.com/software/sixt-together) page of this project.
+
 ## Tech Stack
 The project consists of three parts:
 - A Node.js REST API [backend server](#backend) for coordinating rides and calculating routes
