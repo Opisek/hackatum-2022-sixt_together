@@ -2,8 +2,6 @@ module.exports = class WebServer {
     listen(name, callback) { this._events[name] = callback; }
 
     _emit(name, data) {
-        console.log(name);
-        //console.log(JSON.stringify(data));
         if (name in this._events) return new Promise((res) => this._events[name](data, res));
         return null;
     }
@@ -11,7 +9,6 @@ module.exports = class WebServer {
     constructor(port) {
         this._events = {};
 
-        const http = require("http");
         const express = require("express");
         const server = express();
         const bodyparser = require("body-parser");
